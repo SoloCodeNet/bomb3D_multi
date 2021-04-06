@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://vox/block1.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://vox/block0.vox" type="ArrayMesh" id=2]
+[ext_resource path="res://vox/block3.vox" type="ArrayMesh" id=3]
+[ext_resource path="res://vox/ground.vox" type="ArrayMesh" id=4]
+[ext_resource path="res://vox/block2.vox" type="ArrayMesh" id=5]
+
+[sub_resource type="BoxShape" id=3]
+
+[node name="prepa" type="Spatial"]
+
+[node name="m0" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="m0"]
+
+[node name="CollisionShape" type="CollisionShape" parent="m0/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="m1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="m1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="m1/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="m2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="m2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="m2/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="m3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+mesh = ExtResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="m3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="m3/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )
+
+[node name="g0" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="g0"]
+
+[node name="CollisionShape" type="CollisionShape" parent="g0/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 3 )

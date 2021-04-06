@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://vox/bomb.vox" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/bomb.gd" type="Script" id=2]
+[ext_resource path="res://prepa/explo.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 1, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 0.3, 0.3 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.0230999, 0.180185 ), 0.0, 4.55281, 0, 0, Vector2( 1, 0.0364474 ), -2.54355, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.285141, 0.738956, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.965624, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
+
+[node name="bomb" type="Spatial"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="bomb_part" type="StaticBody" parent="." groups=[
+"box",
+]]
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="bomb_part"]
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="bomb_part"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="CPUParticles" type="CPUParticles" parent="bomb_part"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+amount = 5
+lifetime = 0.5
+mesh = SubResource( 3 )
+direction = Vector3( 0, 1, 0 )
+spread = 119.13
+flatness = 0.3
+gravity = Vector3( 0, 9, 0 )
+initial_velocity = 0.2
+angle = 180.0
+angle_random = 1.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 4 )
+color_ramp = SubResource( 5 )
+
+[node name="explo" parent="." instance=ExtResource( 3 )]
+visible = false
+[connection signal="timeout" from="Timer" to="bomb_part" method="_on_Timer_timeout"]

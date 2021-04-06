@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/box.gd" type="Script" id=1]
+[ext_resource path="res://vox/box.vox" type="ArrayMesh" id=2]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="box" type="StaticBody" groups=[
+"box",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="mesh" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="tw" type="Tween" parent="."]
